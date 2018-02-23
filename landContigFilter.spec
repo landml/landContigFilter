@@ -31,6 +31,7 @@ module landContigFilter {
         assembly_ref assembly_input_ref;
         string workspace_name;
         int min_length;
+		int max_length;
     } FilterContigsParams;
 
 
