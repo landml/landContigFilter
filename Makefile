@@ -18,7 +18,7 @@ default: compile
 all: compile build build-startup-script build-executable-script build-test-script
 
 compile:
-	~/bin/kb-sdk compile $(SPEC_FILE) \
+	kb-sdk compile $(SPEC_FILE) \
 		--out $(LIB_DIR) \
 		--plclname $(SERVICE_CAPS)::$(SERVICE_CAPS)Client \
 		--jsclname javascript/Client \

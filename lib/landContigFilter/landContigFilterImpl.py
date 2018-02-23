@@ -27,7 +27,7 @@ This sample module contains one small method - filter_contigs.
     ######################################### noqa
     VERSION = "0.0.1"
     GIT_URL = "https://github.com/landml/landContigFilter.git"
-    GIT_COMMIT_HASH = "4f9cec92bb1077ba98e5f40d5b8c5bfefe055633"
+    GIT_COMMIT_HASH = "60d442596513828a1391326959e761178fd491ef"
 
     #BEGIN_CLASS_HEADER
     # Class variables and functions can be defined in this block
