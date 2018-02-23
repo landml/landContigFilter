@@ -31,8 +31,14 @@ module landContigFilter {
         assembly_ref assembly_input_ref;
         string workspace_name;
         int min_length;
-		int max_length;
     } FilterContigsParams;
+
+    typedef structure {
+        assembly_ref assembly_input_ref;
+        string workspace_name;
+        int min_length;
+		int max_length;
+    } FilterContigsMaxParams;
 
 
     /*
@@ -58,5 +64,7 @@ module landContigFilter {
         'authentication required' modifier.
     */
     funcdef filter_contigs(FilterContigsParams params)
+        returns (FilterContigsResults output) authentication required;
+    funcdef filter_contigs_max(FilterContigsMaxParams params)
         returns (FilterContigsResults output) authentication required;
 };

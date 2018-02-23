@@ -337,6 +337,10 @@ class Application(object):
                              name='landContigFilter.filter_contigs',
                              types=[dict])
         self.method_authentication['landContigFilter.filter_contigs'] = 'required'  # noqa
+        self.rpc_service.add(impl_landContigFilter.filter_contigs_max,
+                             name='landContigFilter.filter_contigs_max',
+                             types=[dict])
+        self.method_authentication['landContigFilter.filter_contigs_max'] = 'required'  # noqa
         self.rpc_service.add(impl_landContigFilter.status,
                              name='landContigFilter.status',
                              types=[dict])
