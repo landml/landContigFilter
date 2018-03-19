@@ -49,12 +49,8 @@ class landContigFilter(object):
            templates to indicate the type contained in the list or map.  For
            example: list <string> list_of_strings; mapping <string, int>
            map_of_ints;) -> structure: parameter "assembly_input_ref" of type
-           "assembly_ref" (A 'typedef' allows you to provide a more specific
-           name for a type.  Built-in primitive types include 'string',
-           'int', 'float'.  Here we define a type named assembly_ref to
-           indicate a string that should be set to a KBase ID reference to an
-           Assembly data object.), parameter "workspace_name" of String,
-           parameter "min_length" of Long
+           "assembly_ref", parameter "workspace_name" of String, parameter
+           "min_length" of Long
         :returns: instance of type "FilterContigsResults" (Here is the
            definition of the output of the function.  The output can be used
            by other SDK modules which call your code, or the output
@@ -62,11 +58,7 @@ class landContigFilter(object):
            are special output fields- if defined, the Narrative can
            automatically render your Report.) -> structure: parameter
            "report_name" of String, parameter "report_ref" of String,
-           parameter "assembly_output" of type "assembly_ref" (A 'typedef'
-           allows you to provide a more specific name for a type.  Built-in
-           primitive types include 'string', 'int', 'float'.  Here we define
-           a type named assembly_ref to indicate a string that should be set
-           to a KBase ID reference to an Assembly data object.), parameter
+           parameter "assembly_output" of type "assembly_ref", parameter
            "n_initial_contigs" of Long, parameter "n_contigs_removed" of
            Long, parameter "n_contigs_remaining" of Long
         """
@@ -77,13 +69,9 @@ class landContigFilter(object):
     def filter_contigs_max(self, params, context=None):
         """
         :param params: instance of type "FilterContigsMaxParams" ->
-           structure: parameter "assembly_input_ref" of type "assembly_ref"
-           (A 'typedef' allows you to provide a more specific name for a
-           type.  Built-in primitive types include 'string', 'int', 'float'. 
-           Here we define a type named assembly_ref to indicate a string that
-           should be set to a KBase ID reference to an Assembly data
-           object.), parameter "workspace_name" of String, parameter
-           "min_length" of Long, parameter "max_length" of Long
+           structure: parameter "assembly_input_ref" of type "assembly_ref",
+           parameter "workspace_name" of String, parameter "min_length" of
+           Long, parameter "max_length" of Long
         :returns: instance of type "FilterContigsResults" (Here is the
            definition of the output of the function.  The output can be used
            by other SDK modules which call your code, or the output
@@ -91,16 +79,25 @@ class landContigFilter(object):
            are special output fields- if defined, the Narrative can
            automatically render your Report.) -> structure: parameter
            "report_name" of String, parameter "report_ref" of String,
-           parameter "assembly_output" of type "assembly_ref" (A 'typedef'
-           allows you to provide a more specific name for a type.  Built-in
-           primitive types include 'string', 'int', 'float'.  Here we define
-           a type named assembly_ref to indicate a string that should be set
-           to a KBase ID reference to an Assembly data object.), parameter
+           parameter "assembly_output" of type "assembly_ref", parameter
            "n_initial_contigs" of Long, parameter "n_contigs_removed" of
            Long, parameter "n_contigs_remaining" of Long
         """
         return self._client.call_method(
             'landContigFilter.filter_contigs_max',
+            [params], self._service_ver, context)
+
+    def assembly_metadata_report(self, params, context=None):
+        """
+        :param params: instance of type "AssemblyMetadataReportParams" ->
+           structure: parameter "assembly_input_ref" of type "assembly_ref",
+           parameter "workspace_name" of String, parameter "showContigs" of
+           type "boolean" (A boolean. 0 = false, other = true.)
+        :returns: instance of type "AssemblyMetadataResults" -> structure:
+           parameter "report_name" of String, parameter "report_ref" of String
+        """
+        return self._client.call_method(
+            'landContigFilter.assembly_metadata_report',
             [params], self._service_ver, context)
 
     def status(self, context=None):

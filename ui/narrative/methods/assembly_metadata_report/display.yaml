@@ -1,9 +1,9 @@
 #
 # define display information
 #
-name: Filter Contigs
+name: Assembly Metadata Report
 tooltip: |
-    Filters the contigs by removing contigs shorter than specified length
+    Create a report of the metadata of an Assembly Object
 screenshots: []
 
 icon: kaleidoscope.png
@@ -21,7 +21,7 @@ suggestions:
         related:
             []
         next:
-            [annotate_contigset]
+            []
 
 #
 # Configure the display and description of parameters
@@ -31,11 +31,11 @@ parameters :
         ui-name : |
             Assembly
         short-hint : |
-            The assembly to filter (will be overwritten)
-    min_length :
+            The assembly to analyze
+    showContigs:
         ui-name : |
-            Min Length Threshold
+            Include a summary of the contigs
         short-hint : |
-            All contigs below this length will be removed
+            Include a summary of the contigs (Name, Size, %GC, Description) 
 description : |
     <p>This is a simple method designed to illustrate the KBase SDK.</p>

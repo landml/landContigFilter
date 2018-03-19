@@ -26,7 +26,7 @@
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [ "0" ],
             "field_type": "text",
             "text_options": {
                 "validate_as": "int",
@@ -38,11 +38,11 @@
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
+            "default_values": [ "99999999" ],
             "field_type": "text",
             "text_options": {
                 "validate_as": "int",
-                "max_integer" : 0
+                "min_integer" : 0
             }
         }
     ],
@@ -50,7 +50,7 @@
         "service-mapping": {
             "url": "",
             "name":"landContigFilter",
-            "method": "filter_contigsi_max",
+            "method": "filter_contigs_max",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",

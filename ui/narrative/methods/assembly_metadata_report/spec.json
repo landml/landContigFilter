@@ -22,15 +22,15 @@
             }
         },
         {
-            "id": "min_length",
+            "id": "showContigs",
             "optional": false,
             "advanced": false,
             "allow_multiple": false,
-            "default_values": [ "" ],
-            "field_type": "text",
+            "default_values": [ 1 ],
+            "field_type": "int",
             "text_options": {
                 "validate_as": "int",
-                "min_integer" : 1
+                "min_integer" : 0
             }
         }
     ],
@@ -38,7 +38,7 @@
         "service-mapping": {
             "url": "",
             "name":"landContigFilter",
-            "method": "filter_contigs",
+            "method": "assembly_metadata_report",
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",
@@ -50,8 +50,8 @@
                     "target_type_transform": "resolved-ref"
                 },
                 {
-                    "input_parameter": "min_length",
-                    "target_property": "min_length"
+                    "input_parameter": "showContigs",
+                    "target_property": "showContigs"
                 }
             ],
             "output_mapping": [
@@ -62,6 +62,10 @@
                 {
                     "service_method_output_path": [0,"report_ref"],
                     "target_property": "report_ref"
+                },
+                {
+                    "service_method_output_path": [0,"report_content"],
+                    "target_property": "report_content"
                 },
                 {
                     "narrative_system_variable": "workspace",

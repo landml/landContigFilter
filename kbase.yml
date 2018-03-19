@@ -2,13 +2,13 @@ module-name:
     landContigFilter
 
 module-description:
-    A KBase module that filters the contigs with a min/max contig size.
+    A KBase module that filters the contigs in an Assembly with a min/max contig size.
 
 service-language:
     python
 
 module-version:
-    0.0.1
+    0.0.2
 
 owners:
     [landml]

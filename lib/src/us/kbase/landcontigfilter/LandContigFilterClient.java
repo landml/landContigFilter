@@ -201,6 +201,23 @@ public class LandContigFilterClient {
         return res.get(0);
     }
 
+    /**
+     * <p>Original spec-file function name: assembly_metadata_report</p>
+     * <pre>
+     * </pre>
+     * @param   params   instance of type {@link us.kbase.landcontigfilter.AssemblyMetadataReportParams AssemblyMetadataReportParams}
+     * @return   parameter "output" of type {@link us.kbase.landcontigfilter.AssemblyMetadataResults AssemblyMetadataResults}
+     * @throws IOException if an IO exception occurs
+     * @throws JsonClientException if a JSON RPC exception occurs
+     */
+    public AssemblyMetadataResults assemblyMetadataReport(AssemblyMetadataReportParams params, RpcContext... jsonRpcContext) throws IOException, JsonClientException {
+        List<Object> args = new ArrayList<Object>();
+        args.add(params);
+        TypeReference<List<AssemblyMetadataResults>> retType = new TypeReference<List<AssemblyMetadataResults>>() {};
+        List<AssemblyMetadataResults> res = caller.jsonrpcCall("landContigFilter.assembly_metadata_report", args, retType, true, true, jsonRpcContext, this.serviceVersion);
+        return res.get(0);
+    }
+
     public Map<String, Object> status(RpcContext... jsonRpcContext) throws IOException, JsonClientException {
         List<Object> args = new ArrayList<Object>();
         TypeReference<List<Map<String, Object>>> retType = new TypeReference<List<Map<String, Object>>>() {};

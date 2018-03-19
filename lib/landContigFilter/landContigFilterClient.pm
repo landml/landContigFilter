@@ -324,6 +324,106 @@ FilterContigsResults is a reference to a hash where the following keys are defin
     }
 }
  
+
+
+=head2 assembly_metadata_report
+
+  $output = $obj->assembly_metadata_report($params)
+
+=over 4
+
+=item Parameter and return types
+
+=begin html
+
+<pre>
+$params is a landContigFilter.AssemblyMetadataReportParams
+$output is a landContigFilter.AssemblyMetadataResults
+AssemblyMetadataReportParams is a reference to a hash where the following keys are defined:
+	assembly_input_ref has a value which is a landContigFilter.assembly_ref
+	workspace_name has a value which is a string
+	showContigs has a value which is a landContigFilter.boolean
+assembly_ref is a string
+boolean is an int
+AssemblyMetadataResults is a reference to a hash where the following keys are defined:
+	report_name has a value which is a string
+	report_ref has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+$params is a landContigFilter.AssemblyMetadataReportParams
+$output is a landContigFilter.AssemblyMetadataResults
+AssemblyMetadataReportParams is a reference to a hash where the following keys are defined:
+	assembly_input_ref has a value which is a landContigFilter.assembly_ref
+	workspace_name has a value which is a string
+	showContigs has a value which is a landContigFilter.boolean
+assembly_ref is a string
+boolean is an int
+AssemblyMetadataResults is a reference to a hash where the following keys are defined:
+	report_name has a value which is a string
+	report_ref has a value which is a string
+
+
+=end text
+
+=item Description
+
+
+
+=back
+
+=cut
+
+ sub assembly_metadata_report
+{
+    my($self, @args) = @_;
+
+# Authentication: required
+
+    if ((my $n = @args) != 1)
+    {
+	Bio::KBase::Exceptions::ArgumentValidationError->throw(error =>
+							       "Invalid argument count for function assembly_metadata_report (received $n, expecting 1)");
+    }
+    {
+	my($params) = @args;
+
+	my @_bad_arguments;
+        (ref($params) eq 'HASH') or push(@_bad_arguments, "Invalid type for argument 1 \"params\" (value was \"$params\")");
+        if (@_bad_arguments) {
+	    my $msg = "Invalid arguments passed to assembly_metadata_report:\n" . join("", map { "\t$_\n" } @_bad_arguments);
+	    Bio::KBase::Exceptions::ArgumentValidationError->throw(error => $msg,
+								   method_name => 'assembly_metadata_report');
+	}
+    }
+
+    my $url = $self->{url};
+    my $result = $self->{client}->call($url, $self->{headers}, {
+	    method => "landContigFilter.assembly_metadata_report",
+	    params => \@args,
+    });
+    if ($result) {
+	if ($result->is_error) {
+	    Bio::KBase::Exceptions::JSONRPC->throw(error => $result->error_message,
+					       code => $result->content->{error}->{code},
+					       method_name => 'assembly_metadata_report',
+					       data => $result->content->{error}->{error} # JSON::RPC::ReturnObject only supports JSONRPC 1.1 or 1.O
+					      );
+	} else {
+	    return wantarray ? @{$result->result} : $result->result->[0];
+	}
+    } else {
+        Bio::KBase::Exceptions::HTTP->throw(error => "Error invoking method assembly_metadata_report",
+					    status_line => $self->{client}->status_line,
+					    method_name => 'assembly_metadata_report',
+				       );
+    }
+}
+ 
   
 sub status
 {
@@ -367,16 +467,16 @@ sub version {
             Bio::KBase::Exceptions::JSONRPC->throw(
                 error => $result->error_message,
                 code => $result->content->{code},
-                method_name => 'filter_contigs_max',
+                method_name => 'assembly_metadata_report',
             );
         } else {
             return wantarray ? @{$result->result} : $result->result->[0];
         }
     } else {
         Bio::KBase::Exceptions::HTTP->throw(
-            error => "Error invoking method filter_contigs_max",
+            error => "Error invoking method assembly_metadata_report",
             status_line => $self->{client}->status_line,
-            method_name => 'filter_contigs_max',
+            method_name => 'assembly_metadata_report',
         );
     }
 }
@@ -413,7 +513,7 @@ sub _validate_version {
 
 
 
-=head2 assembly_ref
+=head2 boolean
 
 =over 4
 
@@ -421,11 +521,33 @@ sub _validate_version {
 
 =item Description
 
-A 'typedef' allows you to provide a more specific name for
-a type.  Built-in primitive types include 'string', 'int',
-'float'.  Here we define a type named assembly_ref to indicate
-a string that should be set to a KBase ID reference to an
-Assembly data object.
+A boolean. 0 = false, other = true.
+
+
+=item Definition
+
+=begin html
+
+<pre>
+an int
+</pre>
+
+=end html
+
+=begin text
+
+an int
+
+=end text
+
+=back
+
+
+
+=head2 assembly_ref
+
+=over 4
+
 
 
 =item Definition
@@ -534,6 +656,40 @@ max_length has a value which is an int
 
 
 
+=head2 AssemblyMetadataReportParams
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+assembly_input_ref has a value which is a landContigFilter.assembly_ref
+workspace_name has a value which is a string
+showContigs has a value which is a landContigFilter.boolean
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+assembly_input_ref has a value which is a landContigFilter.assembly_ref
+workspace_name has a value which is a string
+showContigs has a value which is a landContigFilter.boolean
+
+
+=end text
+
+=back
+
+
+
 =head2 FilterContigsResults
 
 =over 4
@@ -575,6 +731,38 @@ assembly_output has a value which is a landContigFilter.assembly_ref
 n_initial_contigs has a value which is an int
 n_contigs_removed has a value which is an int
 n_contigs_remaining has a value which is an int
+
+
+=end text
+
+=back
+
+
+
+=head2 AssemblyMetadataResults
+
+=over 4
+
+
+
+=item Definition
+
+=begin html
+
+<pre>
+a reference to a hash where the following keys are defined:
+report_name has a value which is a string
+report_ref has a value which is a string
+
+</pre>
+
+=end html
+
+=begin text
+
+a reference to a hash where the following keys are defined:
+report_name has a value which is a string
+report_ref has a value which is a string
 
 
 =end text
