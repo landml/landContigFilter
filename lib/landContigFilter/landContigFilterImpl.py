@@ -348,18 +348,18 @@ This sample module contains one small method - filter_contigs.
 
 
         # Step 5 - Build a Report and return
-        #reportObj = {
-        #    'objects_created': [{'ref': assembly_input_ref, 'description': 'Assembly'}],
-        #    'text_message': assembly_metadata
-        #}
-        #report = KBaseReport(self.callback_url)
-        #report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
+        reportObj = {
+            'objects_created': [{'ref': assembly_input_ref, 'description': 'AssemblyMetadata'}],
+            'text_message':  "\nThis is the report that I'm returning based on the Assembly"
+        }
+        report = KBaseReport(self.callback_url)
+        report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
 
         # STEP 6: contruct the output to send back
-        output = {'report_name': 'My report' + "\nThis is the report that I'm returning based on the Assembly"
+        output = {'report_name': 'My_report',
+                  'report_ref': report_info['ref']
                    }
 
-        #output = "This is the report that I'm returning based on the Assembly"
 
         print('returning: ' + pformat(output) )
         #END assembly_metadata_report
