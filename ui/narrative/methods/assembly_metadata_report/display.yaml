@@ -34,8 +34,8 @@ parameters :
             The assembly to analyze
     showContigs:
         ui-name : |
-            Include a summary of the contigs
+            Include a fasta of the contigs
         short-hint : |
-            Include a summary of the contigs (Name, Size, %GC, Description) 
+            Include a fasta of the contigs in the Assembly 
 description : |
-    <p>This is a simple method designed to illustrate the KBase SDK.</p>
+    <p>Example of how to do a text report from a database object </p>
