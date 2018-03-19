@@ -343,9 +343,37 @@ This sample module contains one small method - filter_contigs.
 
         data_file_cli = DataFileUtil(self.callback_url)
 #        assembly_metadata = data_file_cli.get_objects({'object_refs': ['assembly_input_ref']})['data'][0]['data']
-        assembly_metadata = data_file_cli.get_objects({'object_refs': [assembly_input_ref]})['data'][0]['data']
-#
+        assembly = data_file_cli.get_objects({'object_refs': [assembly_input_ref]})
+        assembly_metadata = assembly['data'][0]['data']
+        
+        string =  "\nAssembly Metadata\n"
+        list = ['assembly_id', 'dna_size', 'gc_content', 'num_contigs', 
+               'fasta_handle_ref', 'md5', 'type', 'taxon_ref']
+        for item in list:
+            if item in assembly_metadata:
+                string += "\t{:20} = {}".format(item,assembly_metadata[item]) + "\n"
 
+        if 'fasta_handle_info' in assembly_metadata and 'node_file_name' in assembly_metadata['fasta_handle_info']:     
+            string += "\tfilename             = " + assembly_metadata['fasta_handle_info']['node_file_name'] + "\n"
+        string += "BASE counts\n"
+        for base in assembly_metadata['base_counts']:
+#            string += "\t" + base + str(assembly_metadata['base_counts'][base]) + "\n"
+            string += "\t{:5} = {}".format(base,str(assembly_metadata['base_counts'][base])) + "\n"
+        string +=  "\nName\tLength\tGC content\tContigID\tDescription\n" 
+        if 'contigs' in assembly_metadata:
+            myContig = assembly_metadata['contigs']
+            for ctg in myContig:
+                list = ['length', 'gc_content', 'contig_id', 'description']
+                string += ctg 
+#                describeDict(myContig[ctg])
+                for item in list:
+                    if item in myContig[ctg]:
+                        string += "\t{}".format(myContig[ctg][item])  
+                    else:
+                        string += "\t"
+                string += "\n"
+
+        print string
 
         # Step 5 - Build a Report and return
         reportObj = {
