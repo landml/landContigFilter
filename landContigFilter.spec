@@ -11,6 +11,10 @@ module landContigFilter {
         a string that should be set to a KBase ID reference to an
         Assembly data object.
     */
+
+    /* A boolean. 0 = false, other = true. */
+    typedef int boolean;
+
     typedef string assembly_ref;
 
     /*
@@ -41,6 +45,12 @@ module landContigFilter {
     } FilterContigsMaxParams;
 
 
+    typedef structure {
+        assembly_ref assembly_input_ref;
+        string workspace_name;
+        boolean showContigs;
+    } AssemblyMetadataReportParams;
+
     /*
         Here is the definition of the output of the function.  The output
         can be used by other SDK modules which call your code, or the output
@@ -57,6 +67,13 @@ module landContigFilter {
         int n_contigs_remaining;
     } FilterContigsResults;
     
+    typedef structure {
+        string report_name;
+        string report_ref;
+        string report_content;
+
+    } AssemblyMetadataResults;
+    
     /*
         The actual function is declared using 'funcdef' to specify the name
         and input/return arguments to the function.  For all typical KBase
@@ -67,4 +84,6 @@ module landContigFilter {
         returns (FilterContigsResults output) authentication required;
     funcdef filter_contigs_max(FilterContigsMaxParams params)
         returns (FilterContigsResults output) authentication required;
+    funcdef assembly_metadata_report(AssemblyMetadataReportParams params)
+        returns (AssemblyMetadataResults output) authentication required;
 };
