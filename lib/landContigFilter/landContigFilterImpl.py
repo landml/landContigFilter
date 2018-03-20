@@ -381,10 +381,17 @@ This sample module contains one small method - filter_contigs.
 #        report_txt.close()
         with open('assembly_metadata_report.txt',"w") as report_txt:
             report_txt.write(string)
+        with open('assembly_metadata_report.html',"w") as report_txt:
+            report_txt.write(string)
         output_file = [] 
         output_file.append({'path' : os.path.join(self.shared_folder, 'assembly_metadata_report.txt'),
                             'name' : 'assembly_metadata_report.txt',
                             'label' : 'AssemblyMetadata.label',
+                            'description' : 'Text output for the assembly metadata'})
+        html_file = [] 
+        html_file.append({'path' : os.path.join(self.shared_folder, 'assembly_metadata_report.html'),
+                            'name' : 'assembly_metadata_report.html',
+                            'label' : 'AssemblyMetadata.label.html',
                             'description' : 'Text output for the assembly metadata'})
 
         print string
@@ -392,8 +399,7 @@ This sample module contains one small method - filter_contigs.
         # Step 5 - Build a Report and return
         report_params = {'message': string,
                          'direct_html_link_index': 0,
-                         'html_links': [output_file],
-                         'html_links' : output_file,
+                         'html_links': [html_file],
                          'file_links': output_file,
                          'report_object_name': 'assembly_metadata_report_' + str(uuid.uuid4()),
                          'workspace_name': params['workspace_name']
