@@ -384,7 +384,7 @@ This sample module contains one small method - filter_contigs.
         output_file = [] 
         output_file.append({'path' : os.path.join(self.shared_folder, 'assembly_metadata_report.txt'),
                             'name' : 'assembly_metadata_report.txt',
-                            'lable' : 'AssemblyMetadata.label',
+                            'label' : 'AssemblyMetadata.label',
                             'description' : 'Text output for the assembly metadata'})
 
         print string
