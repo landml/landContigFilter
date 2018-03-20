@@ -377,11 +377,11 @@ This sample module contains one small method - filter_contigs.
 
         # Step 5 - Build a Report and return
         reportObj = {
-            'objects_created': [{'ref': assembly_input_ref, 'description': 'AssemblyMetadata'}],
+#            'objects_created': [{'ref': assembly_input_ref, 'description': 'AssemblyMetadata'}],
             'text_message':  "\n" + string
         }
         report = KBaseReport(self.callback_url)
-        report_info = report.create({'report': reportObj, 'workspace_name': params['workspace_name']})
+        report_info = report.create_extended_report({'report': reportObj, 'workspace_name': params['workspace_name']})
 
         # STEP 6: contruct the output to send back
         output = {'report_name': 'My_report',
