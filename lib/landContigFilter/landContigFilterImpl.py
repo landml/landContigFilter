@@ -378,6 +378,7 @@ This sample module contains one small method - filter_contigs.
         # Step 5 - Build a Report and return
         reportObj = {
 #            'objects_created': [{'ref': assembly_input_ref, 'description': 'AssemblyMetadata'}],
+            'report_object_name" : 'assembly_metadata_report',
             'text_message':  "\n" + string
         }
         report = KBaseReport(self.callback_url)
