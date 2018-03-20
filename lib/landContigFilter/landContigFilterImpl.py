@@ -379,21 +379,28 @@ This sample module contains one small method - filter_contigs.
 #        report_txt = open(report_path,"w")
 #        report_txt.write(string)
 #        report_txt.close()
+        with open('assembly_metadata_report.txt',"w") as report_txt:
+            report_txt.write(string)
+        output_file = [] 
+        output_file.append({'path' : os.path.join(self.shared_folder, 'assembly_metadata_report.txt'),
+                            'name' : 'assembly_metadata_report.txt',
+                            'description' : 'Text output for the assembly metadata'})
+
         print string
 
         # Step 5 - Build a Report and return
         report_params = {'message': string,
 #                         'direct_html_link_index': 0,
 #                         'html_links': [html_zipped],
-#                         'file_links': report_txt,
+                         'file_links': output_file,
                          'report_object_name': 'assembly_metadata_report_' + str(uuid.uuid4()),
                          'workspace_name': params['workspace_name']
                         }        
-        reportObj = {
-            'objects_created': [{'ref': 'assembly_metadata_report_' + str(uuid.uuid4()), 'description': 'AssemblyMetadata'}],
-            'report_object_name' : 'assembly_metadata_report',
-            'text_message':  "\n" + string
-        }
+#        reportObj = {
+#            'objects_created': [{'ref': 'assembly_metadata_report_' + str(uuid.uuid4()), 'description': 'AssemblyMetadata'}],
+#            'report_object_name' : 'assembly_metadata_report',
+#            'text_message':  "\n" + string
+#        }
         report = KBaseReport(self.callback_url)
 #        report_info = report.create_extended_report({'report': reportObj, 'workspace_name': params['workspace_name']})
         report_info = report.create_extended_report(report_params)
