@@ -392,7 +392,7 @@ This sample module contains one small method - filter_contigs.
         report_params = {'message': string,
                          'direct_html_link_index': 0,
 #                         'html_links': [html_zipped],
-                         'html_links' : output_file,
+#                         'html_links' : output_file,
                          'file_links': output_file,
                          'report_object_name': 'assembly_metadata_report_' + str(uuid.uuid4()),
                          'workspace_name': params['workspace_name']
