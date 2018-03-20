@@ -2,6 +2,7 @@
 #BEGIN_HEADER
 # The header block is where all import statments should live
 import os
+import uuid
 from Bio import SeqIO
 from pprint import pprint, pformat
 from AssemblyUtil.AssemblyUtilClient import AssemblyUtil
@@ -297,6 +298,7 @@ This sample module contains one small method - filter_contigs.
         :returns: instance of type "AssemblyMetadataResults" -> structure:
            parameter "report_name" of String, parameter "report_ref" of String
         """
+ 
         # ctx is the context object
         # return variables are: output
         #BEGIN assembly_metadata_report
@@ -373,16 +375,28 @@ This sample module contains one small method - filter_contigs.
                         string += "\t"
                 string += "\n"
 
+        report_path = os.path.join(self.shared_folder, 'assembly_metadata_report.txt')
+#        report_txt = open(report_path,"w")
+#        report_txt.write(string)
+#        report_txt.close()
         print string
 
         # Step 5 - Build a Report and return
+        report_params = {'message': string,
+#                         'direct_html_link_index': 0,
+#                         'html_links': [html_zipped],
+#                         'file_links': report_txt,
+                         'report_object_name': 'assembly_metadata_report_' + str(uuid.uuid4()),
+                         'workspace_name': params['workspace_name']
+                        }        
         reportObj = {
-#            'objects_created': [{'ref': assembly_input_ref, 'description': 'AssemblyMetadata'}],
-            'report_object_name" : 'assembly_metadata_report',
+            'objects_created': [{'ref': 'assembly_metadata_report_' + str(uuid.uuid4()), 'description': 'AssemblyMetadata'}],
+            'report_object_name' : 'assembly_metadata_report',
             'text_message':  "\n" + string
         }
         report = KBaseReport(self.callback_url)
-        report_info = report.create_extended_report({'report': reportObj, 'workspace_name': params['workspace_name']})
+#        report_info = report.create_extended_report({'report': reportObj, 'workspace_name': params['workspace_name']})
+        report_info = report.create_extended_report(report_params)
 
         # STEP 6: contruct the output to send back
         output = {'report_name': 'My_report',
