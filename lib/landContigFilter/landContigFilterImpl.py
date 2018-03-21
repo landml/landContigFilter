@@ -40,7 +40,7 @@ This sample module contains one small method - filter_contigs.
         first_file = ""
         html_string = ""
         html_count = 0
-        with open('/kb/data/index_start.txt', 'r') as start_file:
+        with open('/kb/module/data/index_start.txt', 'r') as start_file:
             html_string = start_file.read()
 
         # Make HTML folder
@@ -70,7 +70,7 @@ This sample module contains one small method - filter_contigs.
         html_string += "        <iframe id=\"content\" "
         html_string += "style=\"width: 100%; border: none; \" src=\"" + first_file + "\"></iframe>\n    </div>"
 
-        with open('/kb/data/index_end.txt', 'r') as end_file:
+        with open('/kb/module/data/index_end.txt', 'r') as end_file:
             html_string += end_file.read()
 
         with open(os.path.join(html_folder, "index.html"), 'w') as index_file:
@@ -370,7 +370,7 @@ This sample module contains one small method - filter_contigs.
 
         token = ctx['token']
         uuid_string = str(uuid.uuid4())
-        read_file_path = self.scratch+"/"+uuid_string
+        write_file_path = self.scratch+"/"+uuid_string
 
         # Print statements to stdout/stderr are captured and available as the App log
         print('Starting Assembly MetaData Report Function. Params=')
@@ -445,10 +445,10 @@ This sample module contains one small method - filter_contigs.
                         string += "\t"
                 string += "\n"
 
-        report_path = os.path.join(self.shared_folder, 'assembly_metadata_report.txt')
-#        report_txt = open(report_path,"w")
-#        report_txt.write(string)
-#        report_txt.close()
+        report_path = os.path.join(write_file_path, 'assembly_metadata_report.txt')
+        report_txt = open(report_path,"w")
+        report_txt.write(string)
+        report_txt.close()
 #        with open('assembly_metadata_report.txt',"w") as report_txt:
 #            report_txt.write(string)
 #        with open('assembly_metadata_report.html',"w") as report_txt:
@@ -489,7 +489,7 @@ This sample module contains one small method - filter_contigs.
 #                   }
 
         output = self.create_report(token, params['workspace_name'],
-                                    uuid_string, read_file_path)
+                                    uuid_string, write_file_path)
 
         reported_output = {'report_name': output['name'],
                            'report_ref': output['ref']}
